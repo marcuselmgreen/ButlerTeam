@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import {Icon, withStyles} from "@material-ui/core";
+import { Icon, withStyles } from "@material-ui/core";
 import * as GlobalPaths from "../../../GlobalPaths";
 import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/core/Menu";
@@ -38,37 +38,35 @@ const EmployeeHeader = (props) => {
             <Toolbar>
 
                 <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                            className={classes.menuButton}
-                            onClick={() => changePage(GlobalPaths.homeCorporation)} color="inherit"
-                            aria-label="menu">
+                    className={classes.menuButton} onClick={menuShowHandler} color="inherit"
+                    aria-label="menu">
+                    <Icon fontSize="default"
+                        className="">person</Icon>
+                    <p style={{ fontSize: '17px' }}>Profil</p>
+                </IconButton>
+
+                <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
+                    className={classes.menuButton}
+                    onClick={() => changePage(GlobalPaths.employeePage)} color="inherit"
+                    aria-label="menu">
                     <Icon fontSize="default">home</Icon>
-                    <p style={{fontSize: '17px'}}>Hjem</p>
-
+                    <p style={{ fontSize: '17px' }}>Hjem</p>
                 </IconButton>
 
                 <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                            className={classes.menuButton} onClick={menuShowHandler} color="inherit"
-                            aria-label="menu">
+                    className={classes.menuButton} onClick={menuShowHandler} color="inherit"
+                    aria-label="menu">
                     <Icon fontSize="default"
-                          className="">person</Icon>
-                    <p style={{fontSize: '17px'}}>Profil</p>
-
+                        className="">person</Icon>
+                    <p style={{ fontSize: '17px' }}>Mine jobs</p>
                 </IconButton>
 
                 <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                            className={classes.menuButton} onClick={menuShowHandler} color="inherit"
-                            aria-label="menu">
+                    className={classes.menuButton} onClick={menuShowHandler} color="inherit"
+                    aria-label="menu">
                     <Icon fontSize="default"
-                          className="">person</Icon>
-                    <p style={{fontSize: '17px'}}>Mine jobs</p>
-                </IconButton>
-
-                <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                            className={classes.menuButton} onClick={menuShowHandler} color="inherit"
-                            aria-label="menu">
-                    <Icon fontSize="default"
-                          className="">person</Icon>
-                    <p style={{fontSize: '17px'}}>Find arbejde</p>
+                        className="">person</Icon>
+                    <p style={{ fontSize: '17px' }}>Find arbejde</p>
                 </IconButton>
 
                 <Typography variant="h6" className={classes.title}>
@@ -83,11 +81,11 @@ const EmployeeHeader = (props) => {
                     open={menuOption}
                     onClose={menuShowHandler}
                 >
-                    <MenuItem className="min-w-224">Rediger Profil</MenuItem>
+                    <MenuItem className="min-w-224" onClick={() => changePage(GlobalPaths.editEmployeeProfile)}>Rediger Profil</MenuItem>
                     <MenuItem>Kontakt</MenuItem>
                     <MenuItem>Hjælp</MenuItem>
                     <div className="w-full pl-2 pr-2">
-                        <hr style={{borderTop: '1px solid #cccccc'}}/>
+                        <hr style={{ borderTop: '1px solid #cccccc' }} />
                     </div>
                     <MenuItem onClick={logOutHandler}>Log ud</MenuItem>
                 </Menu>

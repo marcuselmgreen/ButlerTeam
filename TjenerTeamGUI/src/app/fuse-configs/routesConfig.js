@@ -13,6 +13,7 @@ import {EmployeeFrontPageConfig} from "../main/employee/frontPage/EmployeeFrontP
 import {EmployeeLoginConfig} from "../main/employee/employeePage/employeeLogin/EmployeeLoginConfig";
 import {EmployeeHomePageConfig} from "../main/employee/employeePage/homeEmployee/EmployeeHomePageConfig";
 import {createEmployeeConfig} from "../main/employee/employeePage/createEmployee/CreateEmployeeConfig";
+import {EmployeeProfileConfig} from "../main/employee/employeePage/profile/EmployeeProfileConfig";
 
 
 const routeConfigs = [
@@ -27,7 +28,8 @@ const routeConfigs = [
     EmployeeLoginConfig,
     EmployeeHomePageConfig,
     createEmployeeConfig,
-    CorporationProfileConfig
+    CorporationProfileConfig,
+    EmployeeProfileConfig
 ];
 
 const routes = [

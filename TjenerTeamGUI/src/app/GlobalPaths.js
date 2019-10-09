@@ -8,3 +8,4 @@ export const login = "/login";
 export const homeCorporation = './homeCorporation';
 export const editBooking = './editBooking';
 export const editCorporationProfile = "/corporationProfile";
+export const editEmployeeProfile = "/employeeProfile";

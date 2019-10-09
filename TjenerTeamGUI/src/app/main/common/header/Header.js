@@ -65,7 +65,7 @@ class Header extends Component {
                     changePage={changePage}
                 />
                 }
-                {this.props.user.role.includes(employee) &&
+                {this.props.user.role.length <= 0 &&
                 <EmployeeHeader
                     menuShowHandler={this.menuShowHandler}
                     logOutHandler={this.logOutHandler}
@@ -74,7 +74,7 @@ class Header extends Component {
                     changePage={changePage}
                 />
                 }
-                {this.props.user.role.length <= 0 &&
+                {this.props.user.role.includes(employee) &&
                 <AppBar position="static" color="default">
                     <Toolbar>
                         <Typography
