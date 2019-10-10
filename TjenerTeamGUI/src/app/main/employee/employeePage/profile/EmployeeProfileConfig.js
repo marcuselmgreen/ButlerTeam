@@ -1,4 +1,4 @@
-import EditProfile from "./EmployeeProfile";
+import EmployeeProfile from "./EmployeeProfile";
 import authRoles from "../../../../auth/authRoles";
 
 export const EmployeeProfileConfig = {
@@ -26,8 +26,8 @@ export const EmployeeProfileConfig = {
     // auth: authRoles.corporation,
     routes  : [
         {
-            // path     : '/employeeProfile',
-            component: EditProfile
+            path     : '/employeeProfile',
+            component: EmployeeProfile
         }
     ]
 };

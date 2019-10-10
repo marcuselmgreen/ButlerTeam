@@ -23,10 +23,10 @@ export const CorporationProfileConfig = {
             }
         }
     },
-    // auth: authRoles.corporation,
+    auth: authRoles.corporation,
     routes  : [
         {
-            // path     : '/corporationProfile',
+            path     : '/corporationProfile',
             component: EditProfile
         }
     ]
