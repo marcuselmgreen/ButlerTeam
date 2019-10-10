@@ -8,6 +8,8 @@ import AppHeader from "../../../common/header/Header";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Paper from "@material-ui/core/Paper";
+import ChangePassword from "./components/ChangePassword";
+import DeleteProfile from "./components/DeleteProfile";
 
 class EmployeeProfile extends Component {
     constructor(props) {
@@ -22,12 +24,10 @@ class EmployeeProfile extends Component {
     };
 
     changePage = (url) => {
-        console.log("Url: " + url)
         this.props.history.push(url);
     };
 
     changePageHandler = (page) => {
-        console.log("Page: " + page)
         this.props.history.push(page)
     };
 
@@ -51,10 +51,14 @@ class EmployeeProfile extends Component {
                         <Paper style={{backgroundColor: '#ffffff'}} square>
                             <Tabs value={selectedTab} indicatorColor="primary" variant="scrollable" onChange={this.changeTab}>
                                 <Tab label={<span><Icon className="float-left" fontSize="small">info</Icon><span className="ml-2 float-left" style={{fontSize: '12px'}}>Medarbejderoplysninger</span></span>}/>
+                                <Tab label={<span><Icon className="float-left" fontSize="small">lock</Icon><span className="ml-2 float-left" style={{fontSize: '12px'}}>Skift kodeord</span></span>}/>
+                                <Tab label={<span><Icon className="float-left" fontSize="small">delete</Icon><span className="ml-2 float-left" style={{fontSize: '12px'}}>Slet profil</span></span>}/>
                             </Tabs>
                         </Paper>
                         <CardContent className="flex flex-col items-center ">
                             {selectedTab === 0 && <EditEmployeeProfile changePageHandler={this.changePageHandler}/>}
+                            {selectedTab === 1 && <ChangePassword changePageHandler={this.changePageHandler}/>}
+                            {selectedTab === 2 && <DeleteProfile/>}
                         </CardContent>
                     </Card>
                 </div>
