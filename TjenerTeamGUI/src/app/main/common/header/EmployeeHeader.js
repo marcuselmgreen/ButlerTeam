@@ -2,12 +2,15 @@ import React from 'react';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import { Icon, withStyles } from "@material-ui/core";
+import { Icon, withStyles, useTheme } from "@material-ui/core";
 import * as GlobalPaths from "../../../GlobalPaths";
 import Typography from "@material-ui/core/Typography";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
 
+const drawerWidth = 240;
 
 const styles = theme => ({
     root: {
@@ -15,6 +18,25 @@ const styles = theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(3),
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'inline',
+        },
+    },
+    drawerButton: {
+        marginRight: theme.spacing(3),
+        [theme.breakpoints.up('sm')]: {
+            display: 'none',
+        },
+    },
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+    },
+    drawerPaper: {
+        width: drawerWidth,
     },
     title: {
         flexGrow: 1,
@@ -30,13 +52,24 @@ const EmployeeHeader = (props) => {
         classes,
         menuOption,
         anchorEl,
-        changePage
+        changePage,
+        showDrawer,
+        drawerShowHandler
     } = props;
 
-    return (
-        <AppBar position="static" color="default">
-            <Toolbar>
+    const theme = useTheme();
 
+    const drawer = (
+        <Toolbar>
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={drawerShowHandler}
+                    className={classes.drawerButton}
+                >
+                    <Icon fontSize="default">menu</Icon>
+                </IconButton>
                 <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
                     className={classes.menuButton} onClick={menuShowHandler} color="inherit"
                     aria-label="menu">
@@ -91,7 +124,30 @@ const EmployeeHeader = (props) => {
                 </Menu>
 
             </Toolbar>
+    );
+
+    return (
+        <>
+        <AppBar className={classes.appBar} position="static" color="default">
+            {drawer}
         </AppBar>
+        <Hidden smUp implementation="css">
+            <Drawer
+                variant="temporary"
+                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                open={showDrawer}
+                onClose={drawerShowHandler}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+            >
+                {drawer}
+            </Drawer>
+        </Hidden>
+        </>
     );
 };
 

@@ -8,8 +8,9 @@ import AppHeader from "../../../common/header/Header";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Paper from "@material-ui/core/Paper";
-import ChangePassword from "./components/ChangePassword";
 import DeleteProfile from "./components/DeleteProfile";
+import WorkPlaces from './components/workPlaces/WorkPlaces';
+import Skills from './components/skills/Skills';
 
 class EmployeeProfile extends Component {
     constructor(props) {
@@ -51,15 +52,17 @@ class EmployeeProfile extends Component {
                         <Paper style={{ backgroundColor: '#ffffff' }} square>
                             <Tabs value={selectedTab} indicatorColor="primary" variant="scrollable" onChange={this.changeTab}>
                                 <Tab label={<span><Icon className="float-left" fontSize="small">info</Icon><span className="ml-2 float-left" style={{ fontSize: '12px' }}>Medarbejderoplysninger</span></span>} />
-                                <Tab label={<span><Icon className="float-left" fontSize="small">lock</Icon><span className="ml-2 float-left" style={{ fontSize: '12px' }}>Skift kodeord</span></span>} />
+                                <Tab label={<span><Icon className="float-left" fontSize="small">star</Icon><span className="ml-2 float-left" style={{ fontSize: '12px' }}>Kompetencer</span></span>} />
+                                <Tab label={<span><Icon className="float-left" fontSize="small">my_location</Icon><span className="ml-2 float-left" style={{ fontSize: '12px' }}>Zoner</span></span>} />
                                 <Tab label={<span><Icon className="float-left" fontSize="small">delete</Icon><span className="ml-2 float-left" style={{ fontSize: '12px' }}>Slet profil</span></span>} />
                             </Tabs>
                         </Paper>
                         <CardContent>
                             {selectedTab === 0 && <EditEmployeeProfile changePageHandler={this.changePageHandler} />}
+                            {selectedTab === 1 && <Skills changePageHandler={this.changePageHandler} />}
+                            {selectedTab === 2 && <WorkPlaces changePageHandler={this.changePageHandler} />}
                             <div className="flex flex-col items-center">
-                                {selectedTab === 1 && <ChangePassword changePageHandler={this.changePageHandler} />}
-                                {selectedTab === 2 && <DeleteProfile />}
+                                {selectedTab === 4 && <DeleteProfile />}
                             </div>
                         </CardContent>
                     </Card>
