@@ -43,7 +43,7 @@ class ELogin extends Component {
             fbContent = null;
         } else {
             fbContent = (<FacebookLogin
-                appId="694838220979702"
+                appId="432891317343221"
                 autoLoad={true}
                 fields="name,email,picture"
                 onClick={this.componentClicked}
