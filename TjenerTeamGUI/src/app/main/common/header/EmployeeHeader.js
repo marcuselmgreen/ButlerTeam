@@ -43,28 +43,10 @@ const EmployeeHeader = (props) => {
         anchorEl,
         changePage,
         showDrawer,
-        drawerShowHandler
+        drawerShowHandler,
+        drawerItemExpandHandler,
+        expandDrawerItem
     } = props;
-
-    const profileMenu = (
-        <>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={menuOption}
-                onClose={menuShowHandler}
-            >
-                <MenuItem className="min-w-224" onClick={() => changePage(GlobalPaths.editEmployeeProfile)}>Rediger Profil</MenuItem>
-                <MenuItem>Kontakt</MenuItem>
-                <MenuItem>Hjælp</MenuItem>
-                <div className="w-full pl-2 pr-2">
-                    <hr style={{ borderTop: '1px solid #cccccc' }} />
-                </div>
-                <MenuItem onClick={logOutHandler}>Log ud</MenuItem>
-            </Menu >
-        </>
-    );
 
     return (
         <>
@@ -96,7 +78,7 @@ const EmployeeHeader = (props) => {
                     </IconButton>
 
                     <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                        className={classes.menuButton} onClick={menuShowHandler} color="inherit"
+                        className={classes.menuButton} color="inherit"
                         aria-label="menu">
                         <Icon fontSize="default"
                             className="">work_outline</Icon>
@@ -104,7 +86,7 @@ const EmployeeHeader = (props) => {
                     </IconButton>
 
                     <IconButton edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                        className={classes.menuButton} onClick={menuShowHandler} color="inherit"
+                        className={classes.menuButton} color="inherit"
                         aria-label="menu">
                         <Icon fontSize="default"
                             className="">search</Icon>
@@ -116,18 +98,33 @@ const EmployeeHeader = (props) => {
 
                     {/*<SubmitButton style={{color: 'white'}} onClick={() => changePage(GlobalPaths.createBooking)}>Book personale</SubmitButton>*/}
 
-                    {profileMenu}
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={menuOption}
+                        onClose={menuShowHandler}
+                    >
+                        <MenuItem className="min-w-224" onClick={() => changePage(GlobalPaths.editEmployeeProfile)}>Rediger Profil</MenuItem>
+                        <MenuItem>Kontakt</MenuItem>
+                        <MenuItem>Hjælp</MenuItem>
+                        <div className="w-full pl-2 pr-2">
+                            <hr style={{ borderTop: '1px solid #cccccc' }} />
+                        </div>
+                        <MenuItem onClick={logOutHandler}>Log ud</MenuItem>
+                    </Menu >
 
                 </Toolbar>
             </AppBar>
             <Hidden smUp implementation="css">
                 <EmployeeDrawer
-                    menuShowHandler={menuShowHandler}
                     classes={classes}
                     changePage={changePage}
                     showDrawer={showDrawer}
                     drawerShowHandler={drawerShowHandler}
-                    profileMenu={profileMenu}
+                    logOutHandler={logOutHandler}
+                    drawerItemExpandHandler={drawerItemExpandHandler}
+                    expandDrawerItem={expandDrawerItem}
                 >
                 </EmployeeDrawer>
             </Hidden>

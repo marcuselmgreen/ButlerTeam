@@ -8,6 +8,7 @@ import * as GlobalPaths from "../../../../../../GlobalPaths";
 import './EditEmployeeProfile.css';
 import WaiterBody from "../../../../../static/waiterBody.png";
 import WaiterProfile from "../../../../../static/waiterProfile.png";
+import { EditEmployeeFormValidator } from "../../../../../validator/forms/EditEmployeeFormValidator.js";
 import {
     taxCardSelection
 } from '../../helper_functions/Selections'
@@ -15,31 +16,42 @@ import {
 class EditEmployeeProfile extends Component {
     constructor(props) {
         super(props);
-        //this.validator = new FormValidator(EditEmployeeFormValidator);
+        this.validator = new FormValidator(EditEmployeeFormValidator);
+        this.submitted = false;
         this.state = {
             employee: {
-                firstName: "",
-                lastName: "",
                 address: "",
                 zipCode: "",
-                city: "",
-                email: "",
                 phoneNumber: "",
                 cpr: "",
                 accountNumber: "",
                 taxCard: "",
-                //validation: this.validator.valid()
+                validation: this.validator.valid()
             },
         }
     }
+
+    submitHandler = () => {
+        let emp = this.state.employee;
+        const validation = this.validator.validate(emp);
+        const tempEmployee = {...this.state.employee};
+        tempEmployee.validation = validation;
+        this.submitted = true;
+        if (validation.isValid) {
+            this.props.actions.updateUser(this.state.employee);
+            this.props.changePageHandler(GlobalPaths.employeePage)
+        }
+        this.setState({state: this.state});
+    };
+
     changeHandler = (e) => {
-        let tempState = {...this.state.employee};
+        let tempState = { ...this.state.employee };
         tempState[e.target.name] = e.target.value;
-        this.setState({employee: tempState})
+        this.setState({ employee: tempState })
     };
 
     render() {
-        const {employee} = this.state;
+        const { employee } = this.state;
         return (
             <Card className="p-24 max-w-lg" style={{ backgroundColor: 'rgba(0, 0, 0, 0)', boxShadow: 'none' }}>
                 <div className="w-full">
@@ -68,30 +80,6 @@ class EditEmployeeProfile extends Component {
                     <div className="flex flex-wrap sm:my-2">
                         <div className="p-2 w-full sm:w-1/2">
                             <TextField
-                                name="firstName"
-                                label="Fornavn"
-                                className="w-full"
-                                helperText={<span style={{ color: 'red' }}>{}</span>}
-                                value={employee.firstName}
-                                variant="outlined"
-                                onChange={this.changeHandler}
-                            />
-                        </div>
-                        <div className="p-2 w-full sm:w-1/2">
-                            <TextField
-                                name="lastName"
-                                helperText={<span style={{ color: 'red' }}>{}</span>}
-                                label="Efternavn"
-                                className="w-full"
-                                value={employee.lastName}
-                                variant="outlined"
-                                onChange={this.changeHandler}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex flex-wrap sm:my-2">
-                        <div className="p-2 w-full sm:w-1/2">
-                            <TextField
                                 name="address"
                                 label="Adresse"
                                 className="w-full"
@@ -102,32 +90,18 @@ class EditEmployeeProfile extends Component {
                             />
                         </div>
                         <div className="p-2 w-full sm:w-1/2">
-                            <div className="w-1/3 float-left">
-                                <TextField
-                                    type="number"
-                                    name="zipCode"
-                                    className="w-full pr-2 m-0"
-                                    helperText={<span style={{ color: 'red' }}>{}</span>}
-                                    type="number"
-                                    value={employee.zipCode}
-                                    label="Post nr."
-                                    margin="normal"
-                                    variant="outlined"
-                                    onChange={this.changeHandler}
-                                />
-                            </div>
-                            <div className="w-2/3 float-left">
-                                <TextField
-                                    name="city"
-                                    className="w-full pl-2 m-0"
-                                    helperText={<span style={{ color: 'red' }}>{}</span>}
-                                    value={employee.city}
-                                    label="By"
-                                    margin="normal"
-                                    variant="outlined"
-                                    onChange={this.changeHandler}
-                                />
-                            </div>
+                            <TextField
+                                type="number"
+                                name="zipCode"
+                                className="w-full pr-2 m-0"
+                                helperText={<span style={{ color: 'red' }}>{}</span>}
+                                type="number"
+                                value={employee.zipCode}
+                                label="Post nr."
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.changeHandler}
+                            />
                         </div>
                     </div>
                     <div className="flex flex-wrap sm:my-2">
@@ -139,17 +113,6 @@ class EditEmployeeProfile extends Component {
                                 className="w-full"
                                 helperText={<span style={{ color: 'red' }}>{}</span>}
                                 value={employee.phoneNumber}
-                                variant="outlined"
-                                onChange={this.changeHandler}
-                            />
-                        </div>
-                        <div className="p-2 w-full sm:w-1/2">
-                            <TextField
-                                name="email"
-                                helperText={<span style={{ color: 'red' }}>{}</span>}
-                                label="Email"
-                                className="w-full"
-                                value={employee.email}
                                 variant="outlined"
                                 onChange={this.changeHandler}
                             />
@@ -214,11 +177,11 @@ class EditEmployeeProfile extends Component {
                         <div className="w-full">
                             <div className="flex justify-center p-4">
                                 <NextGreenButton
-                                    //onClick={this.submitHandler}
+                                    onClick={this.submitHandler}
                                     color="secondary"
                                     variant="contained"
                                     className="min-w-216 min-h-48 "
-                                    style={{color: "white"}}>
+                                    style={{ color: "white" }}>
                                     Opdater
                                 </NextGreenButton>
                             </div>

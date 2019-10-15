@@ -1,5 +1,7 @@
 import React from 'react';
-import { Icon, withStyles, useTheme, List, ListItem, Drawer, ListItemIcon, ListItemText } from "@material-ui/core";
+import { Icon, withStyles, useTheme, List, ListItem, Drawer, ListItemIcon, ListItemText, Collapse } from "@material-ui/core";
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import * as GlobalPaths from "../../../../GlobalPaths";
 
 const drawerWidth = 240;
@@ -22,16 +24,20 @@ const styles = theme => ({
             display: 'none',
         },
     },
+    nested: {
+        paddingLeft: theme.spacing(4),
+      },
 });
 
 const EmployeeDrawer = (props) => {
     const {
-        menuShowHandler,
         classes,
         changePage,
         showDrawer,
         drawerShowHandler,
-        profileMenu
+        logOutHandler,
+        drawerItemExpandHandler,
+        expandDrawerItem
     } = props;
 
     const theme = useTheme();
@@ -61,13 +67,31 @@ const EmployeeDrawer = (props) => {
                 </div>
 
                 <ListItem button edge="start" aria-controls="simple-menu" aria-haspopup="true"
-                    className={classes.drawerButton} onClick={menuShowHandler} color="inherit"
+                    className={classes.drawerButton} onClick={drawerItemExpandHandler} color="inherit"
                     aria-label="menu">
                     <ListItemIcon style={{ color: '#222222' }}>
                         <Icon fontSize="default">person</Icon>
                     </ListItemIcon>
                     <ListItemText primary={<p style={{ fontSize: '17px' }}>Profil</p>} />
+                    {expandDrawerItem ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
+
+                <Collapse in={expandDrawerItem} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItem button className={classes.nested} onClick={() => changePage(GlobalPaths.editEmployeeProfile)}>
+                            <ListItemText primary="Rediger Profil" />
+                        </ListItem>
+                        <ListItem button className={classes.nested}>
+                            <ListItemText primary="Kontakt" />
+                        </ListItem>
+                        <ListItem button className={classes.nested}>
+                            <ListItemText primary="Hjælp" />
+                        </ListItem>
+                        <ListItem button className={classes.nested} onClick={logOutHandler}>
+                            <ListItemText primary="Log ud" />
+                        </ListItem>
+                    </List>
+                </Collapse>
 
                 <ListItem button edge="start" aria-controls="simple-menu" aria-haspopup="true"
                     className={classes.drawerButton} color="inherit"
@@ -80,7 +104,7 @@ const EmployeeDrawer = (props) => {
 
                 <ListItem button edge="start" aria-controls="simple-menu" aria-haspopup="true"
                     className={classes.drawerButton} color="inherit"
-                    aria-label="menu" onClick={menuShowHandler}>
+                    aria-label="menu">
                     <ListItemIcon style={{ color: '#222222' }}>
                         <Icon fontSize="default">work_outline</Icon>
                     </ListItemIcon>
@@ -89,14 +113,14 @@ const EmployeeDrawer = (props) => {
 
                 <ListItem button edge="start" aria-controls="simple-menu" aria-haspopup="true"
                     className={classes.drawerButton} color="inherit"
-                    aria-label="menu" onClick={menuShowHandler}>
+                    aria-label="menu">
                     <ListItemIcon style={{ color: '#222222' }}>
                         <Icon fontSize="default">search</Icon>
                     </ListItemIcon>
                     <ListItemText primary={<p style={{ fontSize: '17px' }}>Find arbejde</p>} />
                 </ListItem>
             </List>
-            {profileMenu}
+            {/*profileMenu*/}
         </Drawer>
     );
 };

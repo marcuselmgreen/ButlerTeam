@@ -35,7 +35,8 @@ class Header extends Component {
         this.state = {
             menuOption: false,
             anchorEl: undefined,
-            showDrawer: false
+            showDrawer: false,
+            expandDrawerItem: false
         };
     }
 
@@ -54,10 +55,14 @@ class Header extends Component {
         this.setState({showDrawer: !this.state.showDrawer})
     }
 
+    drawerItemExpandHandler = () => {
+        this.setState({expandDrawerItem: !this.state.expandDrawerItem})
+    }
+
     render() {
 
         const {classes, changePage} = this.props;
-        const {menuOption, anchorEl, showDrawer} = this.state;
+        const {menuOption, anchorEl, showDrawer, expandDrawerItem} = this.state;
 
         return (
             <>
@@ -79,6 +84,8 @@ class Header extends Component {
                     changePage={changePage}
                     drawerShowHandler={this.drawerShowHandler}
                     showDrawer={showDrawer}
+                    drawerItemExpandHandler={this.drawerItemExpandHandler}
+                    expandDrawerItem={expandDrawerItem}
                 />
                 }
                 {this.props.user.role.length <= 0 &&
