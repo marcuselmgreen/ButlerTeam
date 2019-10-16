@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import FormValidator from "../../../../../validator/FormValidator";
 import * as GlobalPaths from "../../../../../../GlobalPaths";
+import * as employeeUser from "../../../actions/Employee.actions";
 import './EditEmployeeProfile.css';
 import WaiterBody from "../../../../../static/waiterBody.png";
 import WaiterProfile from "../../../../../static/waiterProfile.png";
@@ -20,6 +21,7 @@ class EditEmployeeProfile extends Component {
         this.submitted = false;
         this.state = {
             employee: {
+                _id: "",
                 address: "",
                 zipCode: "",
                 phoneNumber: "",
@@ -49,6 +51,21 @@ class EditEmployeeProfile extends Component {
         tempState[e.target.name] = e.target.value;
         this.setState({ employee: tempState })
     };
+
+    componentDidMount() {
+        let user = this.props.user;
+        if(user != null) {
+            let tempState = {...this.state.employee};
+            for (let key in tempState) {
+                if (tempState.hasOwnProperty(key)) {
+                    if (tempState[key] === "") {
+                        tempState[key] = user[key];
+                    }
+                }
+            }
+            this.setState({employee: tempState});
+        }
+    }
 
     render() {
         const { employee } = this.state;
@@ -195,14 +212,14 @@ class EditEmployeeProfile extends Component {
 
 function mapStateToProps(state) {
     return {
-        //user: state.auth.user,
+        user: state.auth.user,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            //updateUser: bindActionCreators(corporationUser.updateCorporationUser, dispatch),
+            updateUser: bindActionCreators(employeeUser.updateEmployee, dispatch),
         }
     }
 }

@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {BackRedButton} from "../../../../common/styled-components/CustomButtons";
 import {Dialog} from "@material-ui/core";
+import { bindActionCreators } from "redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import {connect} from "react-redux";
+import * as employeeUser from "../../actions/Employee.actions";
 
 class DeleteProfile extends Component {
     constructor(props) {
@@ -99,7 +101,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            //deleteUser: bindActionCreators(corporationUser.deleteCorporationUser, dispatch)
+            deleteUser: bindActionCreators(employeeUser.deleteEmployeeUser, dispatch)
         }
     }
 }

@@ -9,8 +9,9 @@ export function loginEmployee(user){
 }
 
 export function deleteEmployeeUser(user){
-    let id = user.id;
-    return axios.delete(setup.apiEndPoint + '/employee_users' + id)
+    let id = user._id;
+    console.log(user);
+    return axios.delete(setup.apiEndPoint + '/employee_users/' + id)
         .then(handleResponse)
         .catch(handleError)
 }

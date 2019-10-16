@@ -62,7 +62,7 @@ class EmployeeProfile extends Component {
                             {selectedTab === 1 && <Skills changePageHandler={this.changePageHandler} />}
                             {selectedTab === 2 && <WorkPlaces changePageHandler={this.changePageHandler} />}
                             <div className="flex flex-col items-center">
-                                {selectedTab === 4 && <DeleteProfile />}
+                                {selectedTab === 3 && <DeleteProfile />}
                             </div>
                         </CardContent>
                     </Card>

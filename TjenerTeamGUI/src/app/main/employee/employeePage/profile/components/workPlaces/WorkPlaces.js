@@ -3,6 +3,8 @@ import { Card, FormGroup, Checkbox, FormControlLabel } from "@material-ui/core";
 import { NextGreenButton } from "../../../../../common/styled-components/CustomButtons";
 import { connect } from "react-redux";
 import './WorkPlaces.css';
+import * as employeeUser from "../../../actions/Employee.actions";
+import { bindActionCreators } from "redux";
 
 class WorkPlaces extends Component {
     constructor(props) {
@@ -239,7 +241,6 @@ class WorkPlaces extends Component {
 
 function mapStateToProps(state) {
     return {
-        //changePage: state.corporations.changePage,
         user: state.auth.user,
     }
 }
@@ -247,7 +248,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            //changePassword: bindActionCreators(corporationUser.changePassword, dispatch)
+            updateUser: bindActionCreators(employeeUser.updateEmployee, dispatch)
         }
     }
 }
